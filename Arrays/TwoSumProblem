@@ -1,4 +1,39 @@
 class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        // List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(nums);
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int i : nums) map.put(i, map.getOrDefault(i, 0) + 1);
+
+        Map<String, List<Integer>> distinctPairs = new HashMap<>();
+        
+       System.out.println(Arrays.toString(nums));
+        for(int i=0; i<nums.length; i++){
+            for(int j=i+1; j<nums.length; j++){
+
+                int temp = (nums[i] + nums[j]);
+                System.out.println("nums[i] + nums[j] :" + (nums[i] + nums[j]) + " temp : " +temp); 
+                temp *= -1;
+                if(map.containsKey(temp)){
+                     System.out.println(" i : " + i + " : j :" + j + " : temp : " + temp); 
+                    if(nums[i] < 0 && map.get(temp) == 1) continue;  
+                       List<Integer> list = Arrays.asList(nums[i], nums[j], temp);
+                       Collections.sort(list);
+                       String k = list.get(0) + "" + list.get(1) + "" + list.get(2);
+                       distinctPairs.put(k, list);
+                       System.out.println("k " + k);
+                }   
+            }
+        }
+        List<List<Integer>> output = new ArrayList<>();
+        output.addAll(distinctPairs.values());
+        return output;
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class Solution {
     public int[] twoSum(int[] nums, int target) {
 
         Map<Integer, Integer> map = new HashMap<>();
