@@ -1,0 +1,38 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int currCount = 0;
+        int maxCount = 0;
+
+        int i=0,j=0;
+
+        while(j<s.length()){
+            if(i != j){
+                if(checkUniqueness(i, j, i+1, s)){
+                    currCount++;
+                    j++;
+                }else{
+                    i++;
+                    currCount--;
+                }
+            }else{
+                currCount++;
+                j++;
+            }
+
+            if(currCount > maxCount) maxCount = currCount;
+        }
+        return maxCount;
+    }
+
+    boolean checkUniqueness(int i, int j, int k, String s){
+        if(k < j && s.charAt(i) != s.charAt(k) && s.charAt(j) != s.charAt(k)){
+            checkUniqueness(i, j, ++k, s);
+        }else if (k == j){
+            return true;
+        }else{
+            return false;
+        }
+        return true;
+    }
+}
+
